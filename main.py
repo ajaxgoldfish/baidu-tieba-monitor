@@ -244,10 +244,20 @@ def run_once(page):
 
 
 def main():
+    print('请选择浏览器运行模式:')
+    print('  1 - 无头模式（后台运行，不显示浏览器窗口）')
+    print('  2 - 有头模式（显示浏览器窗口）')
+    choice = input('请输入 1 或 2: ').strip()
+
     co = ChromiumOptions()
-    co.headless()
+    if choice == '2':
+        mode_label = '有头模式'
+    else:
+        co.headless()
+        mode_label = '无头模式'
+
     page = ChromiumPage(co)
-    print('浏览器已启动（无头模式），开始监控...')
+    print(f'浏览器已启动（{mode_label}），开始监控...')
     print(f'监控贴吧: {", ".join(f["name"] for f in FORUMS)}')
     print(f'扫描间隔: {SCAN_INTERVAL // 60} 分钟')
 
