@@ -1,4 +1,4 @@
-from DrissionPage import ChromiumPage
+from DrissionPage import ChromiumPage, ChromiumOptions
 import time
 import json
 import hashlib
@@ -244,8 +244,10 @@ def run_once(page):
 
 
 def main():
-    page = ChromiumPage()
-    print('浏览器已启动，开始监控...')
+    co = ChromiumOptions()
+    co.headless()
+    page = ChromiumPage(co)
+    print('浏览器已启动（无头模式），开始监控...')
     print(f'监控贴吧: {", ".join(f["name"] for f in FORUMS)}')
     print(f'扫描间隔: {SCAN_INTERVAL // 60} 分钟')
 
